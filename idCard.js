@@ -32,7 +32,7 @@ var dict = {
   }
 }
 
-// 计算18位应该是多少
+// 计算最后一位应该是多少
 function idCardEndNum(idCard) {
   var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
   var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
@@ -48,7 +48,7 @@ function idCardEndNum(idCard) {
   return last;
 }
 
-// 解析生日信息 用于身份证
+// 解析生日信息 
 function Birthday(idCard) {
   var birthday, month, date;
   birthday = idCard.substr(6, 8);
