@@ -48,7 +48,7 @@ function idCardEndNum(idCard) {
   return last;
 }
 
-// 解析生日信息 
+// 解析生日信息
 function Birthday(idCard) {
   var birthday, month, date;
   birthday = idCard.substr(6, 8);
@@ -60,9 +60,9 @@ function Birthday(idCard) {
     year: year,
     month: month,
     date: date,
-    week:dict.week(year, month, date), // 星期几
-    zodiac:dict.zodiac(month, date),  // 星座
-    zodiac_zh:dict.zodiac_zh(year)   // 生肖
+    week: dict.week(year, month, date), // 星期几
+    zodiac: dict.zodiac(month, date),  // 星座
+    zodiac_zh: dict.zodiac_zh(year)   // 生肖
   };
 }
 
