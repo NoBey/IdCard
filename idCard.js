@@ -78,6 +78,10 @@ function repairIdCard(idCard){
   if(/(^\d{18}$)/.test(idCard)) return idCard.slice(0,17) + idCardEndNum(idCard)
 }
 
+//
+function (){
+  
+}
 module.exports = {
   endNum: idCardEndNum,
   birthDay: birthDay,
