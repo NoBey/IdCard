@@ -78,15 +78,17 @@ function repairIdCard(idCard){
   if(/(^\d{18}$)/.test(idCard)) return idCard.slice(0,17) + idCardEndNum(idCard)
 }
 
-//
-function (){
-  
+//15位转换18位
+function num15to18(idCard){
+  if(/(^\d{15}$)/.test(idCard)) return repairIdCard(idCard.slice(0,6)+'19'+idCard.slice(6,15))
 }
+
 module.exports = {
   endNum: idCardEndNum,
   birthDay: birthDay,
   checkIdCard: checkIdCard,
-  repairIdCard:repairIdCard,
+  repairIdCard: repairIdCard,
+  num15to18: num15to18,
   all:(idCard)=>{
     return {
       endNum: idCardEndNum(idCard),
@@ -97,5 +99,6 @@ module.exports = {
 }
 
 
+// console.log(num15to18("411403960314001"))
 
 // console.log(checkIdCard("411403199603140010"))
