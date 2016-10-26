@@ -9,4 +9,5 @@ converter.on("end_parsed", function (jsonArray) {
 });
 
 //read from file
+
 require("fs").createReadStream("./chinese-id-card-area.csv").pipe(converter);
