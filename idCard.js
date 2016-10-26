@@ -49,7 +49,7 @@ function idCardEndNum(idCard) {
 }
 
 // 解析生日信息
-function Birthday(idCard) {
+function birthDay(idCard) {
   var birthday, month, date;
   birthday = idCard.substr(6, 8);
   year = idCard.substr(6, 4);
@@ -66,13 +66,32 @@ function Birthday(idCard) {
   };
 }
 
+// 验证身份证号是否正确
+function checkIdCard(idCard){
+  if(/(^\d{18}$)/.test(idCard) && idCardEndNum(idCard)==idCard[17]) return true
+  return false
+}
+
+// 补全身份证号
+function repairIdCard(idCard){
+  if(/(^\d{17}$)/.test(idCard)) return idCard + idCardEndNum(idCard)
+  if(/(^\d{18}$)/.test(idCard)) return idCard.slice(0,17) + idCardEndNum(idCard)
+}
+
 module.exports = {
-  EndNum: idCardEndNum,
-  Birthday: Birthday,
+  endNum: idCardEndNum,
+  birthDay: birthDay,
+  checkIdCard: checkIdCard,
+  repairIdCard:repairIdCard,
   all:(idCard)=>{
     return {
-      EndNum: idCardEndNum(idCard),
-      Birthday: Birthday(idCard)
+      endNum: idCardEndNum(idCard),
+      birthDay: birthDay(idCard),
+      checkIdCard: checkIdCard(idCard)
     }
   }
 }
+
+
+
+// console.log(checkIdCard("411403199603140010"))
