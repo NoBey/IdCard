@@ -5,6 +5,14 @@
 
 
 
+## 安装
+`npm install js-idcard`
+
+## 使用
+```js
+var IdCard = require('js-idcard')
+```
+
 ### 注意:身份证传递时请使用字符串不要用数字类型
 
 ## 方法列表
