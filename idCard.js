@@ -1,5 +1,5 @@
 var node_constellation = require('node-constellation');
-
+var dataAddress = require('./data/data.json')
 // 字典
 var dict = {
   week: function(year, month, date) {
@@ -78,22 +78,38 @@ function repairIdCard(idCard){
   if(/(^\d{18}$)/.test(idCard)) return idCard.slice(0,17) + idCardEndNum(idCard)
 }
 
-//15位转换18位
+// 15位转换18位
 function num15to18(idCard){
   if(/(^\d{15}$)/.test(idCard)) return repairIdCard(idCard.slice(0,6)+'19'+idCard.slice(6,15))
 }
 
+// 地址信息解析
+function address(idCard){
+
+}
+
+// 性别解析
+function sex(idCard){
+  if(idCard[16]%2) return '男'
+  return '女'
+}
+console.log(sex("411403199603140010"))
+console.log(sex("411403199603140040"))
 module.exports = {
   endNum: idCardEndNum,
   birthDay: birthDay,
   checkIdCard: checkIdCard,
   repairIdCard: repairIdCard,
   num15to18: num15to18,
+  sex: sex,
+  address: address,
   all:(idCard)=>{
     return {
       endNum: idCardEndNum(idCard),
       birthDay: birthDay(idCard),
-      checkIdCard: checkIdCard(idCard)
+      checkIdCard: checkIdCard(idCard),
+      address: address(idCard),
+      sex: sex(idCard)
     }
   }
 }
