@@ -68,7 +68,7 @@ function birthDay(idCard) {
 
 // 验证身份证号是否正确
 function checkIdCard(idCard) {
-  if (/(^\d{18}$)/.test(idCard) && idCardEndNum(idCard) == idCard[17]) return true
+  if (/(^\d{18}$)/.test(idCard) && idCardEndNum(idCard) == idCard[17].toUpperCase()) return true
   return false
 }
 
