@@ -22,13 +22,18 @@ var dict = {
     return arr[year]
   },
   zodiac: function(month, date) {
-    if (month != undefined && date != undefined) return node_constellation(month, date, 'zh-cn')
-    if (date == undefined && month != undefined) {
-      if (month.length == 4) return node_constellation(month.substr(0, 2), month.substr(2, 2), 'zh-cn')
-      month = month.split(/\/|\\|-/)
-      return node_constellation(month[0], month[1], 'zh-cn')
+    try{
+      if (month != undefined && date != undefined) return node_constellation(month, date, 'zh-cn')
+      if (date == undefined && month != undefined) {
+        if (month.length == 4) return node_constellation(month.substr(0, 2), month.substr(2, 2), 'zh-cn')
+        month = month.split(/\/|\\|-/)
+        return node_constellation(month[0], month[1], 'zh-cn')
+      }
+      return
     }
-    return
+    catch(err){
+      return '出错'+month+date
+    }
   }
 }
 
@@ -87,6 +92,10 @@ function num15to18(idCard) {
 function address(idCard) {
   var addressId = idCard.slice(0, 6)
   var data = dataAddress[addressId]
+  if(data == undefined){
+    console.log(idCard)
+    return "未找到"
+  }
   data.all = (data.provinces + '-' + data.citiy + '-' + data.areas).replace('无', '')
   return data
 }
