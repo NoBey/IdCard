@@ -50,18 +50,18 @@ function idCardEndNum(idCard) {
 
 // 解析生日信息
 function birthDay(idCard) {
-  var birthday, month, date;
+  var birthday, month, day;
   birthday = idCard.substr(6, 8);
   year = idCard.substr(6, 4);
   month = idCard.substr(10, 2);
-  date = idCard.substr(12, 2);
+  day = idCard.substr(12, 2);
   return {
     date: birthday,
     year: year,
     month: month,
-    date: date,
-    week: dict.week(year, month, date), // 星期几
-    zodiac: dict.zodiac(month, date), // 星座
+    day: day,
+    week: dict.week(year, month, day), // 星期几
+    zodiac: dict.zodiac(month, day), // 星座
     zodiac_zh: dict.zodiac_zh(year) // 生肖
   };
 }

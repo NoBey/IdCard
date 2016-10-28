@@ -28,7 +28,7 @@ var IdCard = require('js-idcard')
 
 ----
 
-### IdCard.Birthday(IdCard)
+### IdCard.birthDay(IdCard)
 返回计算出来的星期几,星座,生肖
 
 ##### 参数说明
@@ -40,7 +40,7 @@ var IdCard = require('js-idcard')
   date: 20010101,
   year: 2001,
   month: 01,
-  date: 01,
+  day: 01,
   week: '星期一', // 星期几
   zodiac: '天秤座',  // 星座
   zodiac_zh: '龙'  // 生肖
