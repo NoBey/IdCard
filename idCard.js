@@ -1,4 +1,7 @@
 var node_constellation = require('node-constellation');
+var chineseLunar = require("chinese-lunar");
+
+
 var dataAddress = require('./data/data.json')
   // 字典
 var dict = {
@@ -53,21 +56,37 @@ function idCardEndNum(idCard) {
   return last;
 }
 
+// 农历转换
+function nong(birthday){
+  var birthday = birthday.split(/\/|\\|-/)
+  birthday = birthday.slice(0,4)+'/'+ba.slice(4,6)+'/'+ba.slice(6,8)
+  nong = new Date(birthday)
+  try {
+      var lunar = chineseLunar.solarToLunar(nong)
+  } catch (err) {
+    return '时间错误'
+  }
+  return lunar.year+'/'+lunar.month+'/'+lunar.day
+}
+
 // 解析生日信息
 function birthDay(idCard) {
-  var birthday, month, day;
-  birthday = idCard.substr(6, 8);
+  var birthday, month, day, nong;
   year = idCard.substr(6, 4);
   month = idCard.substr(10, 2);
   day = idCard.substr(12, 2);
+  birthday = year + '/' + month + '/' + day;
+  nong = nong(birthday);
+  nongyear = nong.substr(0, 4)
   return {
     date: birthday,
+    nong: nong,
     year: year,
     month: month,
     day: day,
     week: dict.week(year, month, day), // 星期几
     zodiac: dict.zodiac(month, day), // 星座
-    zodiac_zh: dict.zodiac_zh(year) // 生肖
+    zodiac_zh: dict.zodiac_zh(nongyear) // 生肖
   };
 }
 
@@ -125,6 +144,7 @@ module.exports = {
   num15to18: num15to18,
   sex: sex,
   address: address,
+  nong: nong,
   all: (idCard) => {
     return {
       endNum: idCardEndNum(idCard),

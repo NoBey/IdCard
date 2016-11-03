@@ -37,7 +37,8 @@ var IdCard = require('js-idcard')
 ##### 返回数据
 ```js
 {
-  date: 20010101,
+  date: '2014/2/2',
+  nong: '2013/3/3',
   year: 2001,
   month: 01,
   day: 01,
@@ -96,6 +97,18 @@ var IdCard = require('js-idcard')
 
 ---
 
+### IdCard.nong(date)
+返回性别 农历日期
+
+
+##### 参数说明
+- @param {String} date 日期 2016/01/01
+
+##### 返回数据
+`{String}农历日期`
+
+---
+
 ### IdCard.address(IdCard)
 返回 地址信息
 
@@ -129,7 +142,8 @@ var IdCard = require('js-idcard')
 {
   endNum: 6,
   birthDay: {
-    date: '27',
+    date: '2014/2/2',
+    nong: '2013/3/3',
     year: '1985',
     month: '01',
     week: '星期天',
