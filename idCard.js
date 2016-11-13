@@ -1,9 +1,8 @@
 var node_constellation = require('node-constellation');
-var chineseLunar = require("chinese-lunar");
-
+var chineseLunar = require('chinese-lunar');
 
 var dataAddress = require('./data/data.json')
-  // 字典
+// 字典
 var dict = {
   week: function(year, month, date) {
     var i = new Date(year, month - 1, date).getUTCDay()
@@ -42,6 +41,7 @@ var dict = {
 
 // 计算最后一位应该是多少
 function idCardEndNum(idCard) {
+  idCard = idCard.toString()
   var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
   var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
   var sum = 0;
@@ -62,7 +62,7 @@ function nong(birthday){
   birthday = birthday.slice(0,4)+'/'+ba.slice(4,6)+'/'+ba.slice(6,8)
   nong = new Date(birthday)
   try {
-      var lunar = chineseLunar.solarToLunar(nong)
+    var lunar = chineseLunar.solarToLunar(nong)
   } catch (err) {
     return '时间错误'
   }
@@ -71,6 +71,7 @@ function nong(birthday){
 
 // 解析生日信息
 function birthDay(idCard) {
+  idCard = idCard.toString()
   var birthday, month, day, nong;
   year = idCard.substr(6, 4);
   month = idCard.substr(10, 2);
@@ -92,28 +93,32 @@ function birthDay(idCard) {
 
 // 验证身份证号是否正确
 function checkIdCard(idCard) {
+  idCard = idCard.toString()
   if (/(^\d{18}$)/.test(idCard) && idCardEndNum(idCard) == idCard[17].toUpperCase()) return true
   return false
 }
 
 // 补全身份证号
 function repairIdCard(idCard) {
+  idCard = idCard.toString()
   if (/(^\d{17}$)/.test(idCard)) return idCard + idCardEndNum(idCard)
   if (/(^\d{18}$)/.test(idCard)) return idCard.slice(0, 17) + idCardEndNum(idCard)
 }
 
 // 15位转换18位
 function num15to18(idCard) {
+  idCard = idCard.toString()
   if (/(^\d{15}$)/.test(idCard)) return repairIdCard(idCard.slice(0, 6) + '19' + idCard.slice(6, 15))
 }
 
 // 地址信息解析
 function address(idCard) {
+  idCard = idCard.toString()
   var addressId = idCard.slice(0, 6)
   var data = dataAddress[addressId]
   if(data == undefined){
     console.log(idCard)
-    return "未找到"
+    return '未找到'
   }
   data.all = (data.provinces + '-' + data.citiy + '-' + data.areas).replace('无', '')
   return data
@@ -132,6 +137,7 @@ function address(idCard) {
 
 // 性别解析
 function sex(idCard) {
+  idCard = idCard.toString()
   if (idCard[16] % 2) return '男'
   return '女'
 }
@@ -157,6 +163,6 @@ module.exports = {
 }
 
 
-// console.log(num15to18("411403960314001"))
+// console.log(num15to18('411403960314001'))
 
-// console.log(checkIdCard("411403199603140010"))
+// console.log(checkIdCard('411403199603140010'))
