@@ -4,7 +4,7 @@
   "description": "身份证解析",
   "main": "idCard.js",
   "dependencies": {
-    "chinese-lunar": "^0.1.1",
+    "chinese-lunar": "^0.1.4",
     "node-constellation": "^0.0.5"
   },
   "devDependencies": {},
