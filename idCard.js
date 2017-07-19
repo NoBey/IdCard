@@ -57,9 +57,9 @@ function idCardEndNum(idCard) {
 }
 
 // 农历转换
-function nong(birthday){
+function Nong(birthday){
   var birthday = birthday.split(/\/|\\|-/)
-  birthday = birthday.slice(0,4)+'/'+ba.slice(4,6)+'/'+ba.slice(6,8)
+  birthday = birthday.slice(0,4)+'/'+birthday.slice(4,6)+'/'+birthday.slice(6,8)
   nong = new Date(birthday)
   try {
     var lunar = chineseLunar.solarToLunar(nong)
@@ -77,7 +77,7 @@ function birthDay(idCard) {
   month = idCard.substr(10, 2);
   day = idCard.substr(12, 2);
   birthday = year + '/' + month + '/' + day;
-  nong = nong(birthday);
+  nong = Nong(birthday);
   nongyear = nong.substr(0, 4)
   return {
     date: birthday,
@@ -150,7 +150,7 @@ module.exports = {
   num15to18: num15to18,
   sex: sex,
   address: address,
-  nong: nong,
+  nong: Nong,
   all: (idCard) => {
     return {
       endNum: idCardEndNum(idCard),
