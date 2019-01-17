@@ -94,7 +94,7 @@ function birthDay(idCard) {
 // 验证身份证号是否正确
 function checkIdCard(idCard) {
   idCard = idCard.toString()
-  if (/(^\d{18}$)/.test(idCard) && idCardEndNum(idCard) == idCard[17].toUpperCase()) return true
+  if (/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idCard) && idCardEndNum(idCard) == idCard[17].toUpperCase()) return true
   return false
 }
 
